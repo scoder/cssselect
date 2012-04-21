@@ -2,8 +2,12 @@
 
 import re
 import os.path
-from setuptools import setup
-
+try:
+    from setuptools import setup
+    extra_kwargs = {'test_suite': 'cssselect.tests'}
+except ImportError:
+    from distutils.core import setup
+    extra_kwargs = {}
 
 ROOT = os.path.dirname(__file__)
 README = open(os.path.join(ROOT, 'README.rst')).read()
@@ -24,7 +28,6 @@ setup(
     url='http://packages.python.org/cssselect/',
     license='BSD',
     packages=['cssselect'],
-    test_suite='cssselect.tests',
     classifiers=[
         'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
@@ -38,4 +41,5 @@ setup(
         'Programming Language :: Python :: 3.1',
         'Programming Language :: Python :: 3.2',
     ],
+    **extra_kwargs
 )
